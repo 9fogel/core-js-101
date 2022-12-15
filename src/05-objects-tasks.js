@@ -59,9 +59,10 @@ function getJSON(obj) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
-  // const object = JSON.parse(json);
+function fromJSON(proto, json) {
+  const obj = JSON.parse(json);
+  Object.setPrototypeOf(obj, proto);
+  return obj;
 }
 
 
@@ -119,33 +120,82 @@ function fromJSON(/* proto, json */) {
  *  For more examples see unit tests.
  */
 
+// class MySelector {
+//   constructor(value) {
+//     this.value = value;
+//     let arr = [];
+//   }
+
+//   element(value) {
+//     return this.value;
+//   }
+
+//   id(value) {
+//     return `#${this.value}`;
+//   }
+
+//   class(value) {
+//     return `.${this.value}`;
+//   }
+
+//   attr(value) {
+//     return `[${this.value}]`;
+//   }
+
+//   pseudoClass(value) {
+//     return `:${this.value}`;
+//   }
+
+//   pseudoElement(value) {
+//     return `::${this.value}`;
+//   }
+
+//   combine(selector1, combinator, selector2) {
+//     this.selector1 = selector1.stringify();
+//     this.selector2 = selector2.stringify();
+//     return `${this.selector1} ${combinator} ${selector2}`;
+//   }
+
+//   stringify() {
+
+//   }
+
+// }
+
 const cssSelectorBuilder = {
   element(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().element(value);
   },
 
   id(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().id(value);
   },
 
   class(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().class(value);
   },
 
   attr(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().attr(value);
   },
 
   pseudoClass(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().pseudoClass(value);
   },
 
   pseudoElement(/* value */) {
     throw new Error('Not implemented');
+    // return new MySelector().pseudoElement(value);
   },
 
   combine(/* selector1, combinator, selector2 */) {
     throw new Error('Not implemented');
+    // return new MySelector().combine(selector1, combinator, selector2);
   },
 };
 
