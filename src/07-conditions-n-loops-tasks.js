@@ -192,14 +192,13 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  // for (let i = 0; i < str.length; i += 1) {
-  //   if (str.indexOf(str[i]) !== str.lastIndexOf(str[str.length - 1 - i])) {
-  //     return str[i];
-  //   }
-  // }
-  // return null;
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str.indexOf(str[i]) === str.lastIndexOf(str[i])) {
+      return str[i];
+    }
+  }
+  return null;
 }
 
 
@@ -302,8 +301,40 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const arr = Array.from(ccn.toString()).map((elem) => +elem);
+  const arr2 = [];
+  const arr4 = [];
+  if ((arr.length - 1) % 2 !== 0) {
+    for (let i = 0; i < arr.length; i += 1) {
+      if (i % 2 === 0) {
+        arr2.push(arr[i] * 2);
+      } else {
+        arr4.push(arr[i]);
+      }
+    }
+    const arr3 = arr2.map((el) => ((el > 9) ? el - 9 : el));
+    const finalArr = [...arr3, ...arr4];
+    const res = finalArr.reduce((acc, cur) => acc + cur, 0);
+    if (res % 10 === 0) {
+      return true;
+    }
+  } else {
+    for (let i = 0; i < arr.length; i += 1) {
+      if (i % 2 !== 0) {
+        arr2.push(arr[i] * 2);
+      } else {
+        arr4.push(arr[i]);
+      }
+    }
+    const arr3 = arr2.map((el) => ((el > 9) ? el - 9 : el));
+    const finalArr = [...arr3, ...arr4];
+    const res = finalArr.reduce((acc, cur) => acc + cur, 0);
+    if (res % 10 === 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
