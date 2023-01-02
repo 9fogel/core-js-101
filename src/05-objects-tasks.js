@@ -120,82 +120,107 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-// class MySelector {
-//   constructor(value) {
-//     this.value = value;
-//     let arr = [];
-//   }
+class MySelector {
+  constructor(value) {
+    this.value = value;
+    this.arr = [];
+  }
 
-//   element(value) {
-//     return this.value;
-//   }
+  element(value) {
+    this.arr.push(value);
+  }
 
-//   id(value) {
-//     return `#${this.value}`;
-//   }
+  id(value) {
+    this.arr.push(`#${value}`);
+  }
 
-//   class(value) {
-//     return `.${this.value}`;
-//   }
+  class(value) {
+    this.arr.push(`.${value}`);
+  }
 
-//   attr(value) {
-//     return `[${this.value}]`;
-//   }
+  attr(value) {
+    this.arr.push(`[${value}]`);
+  }
 
-//   pseudoClass(value) {
-//     return `:${this.value}`;
-//   }
+  pseudoClass(value) {
+    this.arr.push(`:${value}`);
+  }
 
-//   pseudoElement(value) {
-//     return `::${this.value}`;
-//   }
+  pseudoElement(value) {
+    this.arr.push(`::${value}`);
+  }
 
-//   combine(selector1, combinator, selector2) {
-//     this.selector1 = selector1.stringify();
-//     this.selector2 = selector2.stringify();
-//     return `${this.selector1} ${combinator} ${selector2}`;
-//   }
+  combine(selector1, combinator, selector2) {
+    this.selector1 = selector1.stringify();
+    this.selector2 = selector2.stringify();
+    return `${this.selector1} ${combinator} ${selector2}`;
+  }
 
-//   stringify() {
-
-//   }
-
-// }
+  stringify() {
+    return this.arr.join('');
+  }
+}
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().element(value);
+  element(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().element(value);
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().id(value);
+  id(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().id(value);
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().class(value);
+  class(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().class(value);
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().attr(value);
+  attr(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().attr(value);
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().pseudoClass(value);
+  pseudoClass(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().pseudoClass(value);
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
-    // return new MySelector().pseudoElement(value);
+  pseudoElement(value) {
+    // throw new Error('Not implemented');
+    return new MySelector().pseudoElement(value);
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
-    // return new MySelector().combine(selector1, combinator, selector2);
+  combine(selector1, combinator, selector2) {
+    // throw new Error('Not implemented');
+    return new MySelector().combine(selector1, combinator, selector2);
+  },
+
+  stringify() {
+    if (this.value) {
+      return this.value;
+    }
+    this.value = '';
+    if (this.elementValue) {
+      this.value += this.elementValue;
+    }
+    if (this.idValue) {
+      this.value += this.idValue;
+    }
+    if (this.classValue) {
+      this.value += this.classValue;
+    }
+    if (this.attributeValue) {
+      this.value += this.attributeValue;
+    }
+    if (this.pseudoClassValue) {
+      this.value += this.pseudoClassValue;
+    }
+    if (this.pseudoElementValue) {
+      this.value += this.pseudoElementValue;
+    }
+    return this.value;
   },
 };
 
