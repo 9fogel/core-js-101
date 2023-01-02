@@ -527,10 +527,19 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  for (let r = 0; r < position.length; r += 1) {
+    // eslint-disable-next-line max-len
+    if (position[r][0] && position[r][0] === position[r][1] && position[r][1] === position[r][2]) return position[r][0];
+    // eslint-disable-next-line max-len
+    if (position[0][r] && position[0][r] === position[1][r] && position[1][r] === position[2][r]) return position[0][r];
+  }
+  // eslint-disable-next-line max-len
+  if (position[1][1] && position[0][0] === position[1][1] && position[1][1] === position[2][2]) return position[1][1];
+  // eslint-disable-next-line max-len
+  if (position[1][1] && position[2][0] === position[1][1] && position[1][1] === position[0][2]) return position[1][1];
+  return undefined;
 }
-
 
 module.exports = {
   getFizzBuzz,
